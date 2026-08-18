@@ -1,0 +1,98 @@
+@if (courses.length > 0) {
+    <table class="table table-primary table-striped table-hover mt-5 p-3">
+        <thead>
+            <tr class="p-3">
+                <th scope="col p-3 m-3">#</th>
+                <th scope="col p-3 m-3">Course Name</th>
+                <th scope="col p-3 m-3">Progress</th>
+                <th scope="col p-3 m-3">Started At</th>
+                <th scope="col p-3 m-3">Control</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (course of courses | courseProgress; track course.name; let i = $index) {
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ course.name }}</td>
+                    <td>
+                        <div
+                            class="progress"
+                            role="progressbar"
+                            aria-label="progress"
+                            aria-valuenow="{{ course.progress }}"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                        >
+                            <div class="progress-bar" [style.width.%]="course.progress">
+                                {{ course.progress }}%
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ course.start | date }}</td>
+                    <td class="d-flex gap-2">
+                        <button class="btn btn-primary" routerLink="/course/edit/{{ course.id }}">
+                            Edit
+                        </button>
+
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#delete"
+                            (click)="selectCourseToDelete(course)"
+                        >
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div
+        class="modal fade"
+        id="delete"
+        tabindex="-1"
+        aria-labelledby="deleteModal"
+        aria-hidden="true"
+    >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModal">Delete Course</h1>
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                    ></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete
+                    <strong>{{ courseToDelete?.name }}</strong
+                    >?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <button
+                        type="button"
+                        class="btn btn-danger"
+                        data-bs-dismiss="modal"
+                        (click)="deleteCourse()"
+                    >
+                        Confirm Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+} @else {
+    <div class="">
+        <h1 class="text-center fs-2 fw-bolder mb-4" appHighlight>No courses Yet.</h1>
+        <a href="/course/add">
+            <button class="d-block m-auto btn btn-success px-4 py-3">Add New Course</button>
+        </a>
+    </div>
+}

@@ -1,0 +1,85 @@
+<div class="w-100 h-100 d-flex justify-content-center align-items-center">
+    <div class="add-container rounded-2 border-5 border-success">
+        <div class="text-center">
+            <h1 class="fw-bolder">Welcome</h1>
+            <p class="text-primary fs-5 fw-semibold">Edit your course</p>
+        </div>
+        <form [formGroup]="courseData" (ngSubmit)="editCourse()" class="w-100">
+            <!-- <form class="w-100"> -->
+            <div class="w-100 mb-3">
+                <label for="courseName" class="fs-6 fw-semibold mb-1">Course Name</label>
+                <input
+                    type="text"
+                    class="form-control p-2"
+                    id="courseName"
+                    placeholder="Course Name"
+                    formControlName="name"
+                />
+                <div class="mt-1">
+                    @if (courseData.get('name')?.touched && courseData.get('name')?.dirty) {
+                        @if (courseData.get('name')?.getError('required')) {
+                            <p class="text-danger fw-semibold fs-6">Course name is required</p>
+                        } @else if (courseData.get('name')?.getError('minlength')) {
+                            <p class="text-danger fw-semibold fs-6">
+                                Course name should be at least 3 letters
+                            </p>
+                        } @else if (courseData.get('name')?.getError('maxlength')) {
+                            <p class="text-danger fw-semibold fs-6">
+                                Course name should be at most 30 letters
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="w-100 mb-3">
+                <label for="hoursStudied" class="fs-6 fw-semibold mb-1">Hours Studied</label>
+                <input
+                    type="number"
+                    class="form-control p-2"
+                    id="hoursStudied"
+                    placeholder="Hours Studied"
+                    formControlName="hoursStudied"
+                />
+                <div class="mt-1">
+                    @if (
+                        courseData.get('hoursStudied')?.touched &&
+                        courseData.get('hoursStudied')?.dirty
+                    ) {
+                        @if (courseData.get('hoursStudied')?.getError('required')) {
+                            <p class="text-danger fw-semibold fs-6">Hours studied is required</p>
+                        } @else if (courseData.get('hoursStudied')?.getError('pattern')) {
+                            <p class="text-danger fw-semibold fs-6">
+                                Hours studied accept number only
+                            </p>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="w-100 mb-3">
+                <label for="target" class="fs-6 fw-semibold mb-1">Target</label>
+                <input
+                    type="number"
+                    class="form-control p-2"
+                    id="target"
+                    placeholder="Target"
+                    formControlName="target"
+                />
+                <div class="mt-1">
+                    <div class="mt-1">
+                        @if (courseData.get('target')?.touched && courseData.get('target')?.dirty) {
+                            @if (courseData.get('target')?.getError('required')) {
+                                <p class="text-danger fw-semibold fs-6">Target is required</p>
+                            } @else if (courseData.get('target')?.getError('pattern')) {
+                                <p class="text-danger fw-semibold fs-6">
+                                    Target accept number only
+                                </p>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>

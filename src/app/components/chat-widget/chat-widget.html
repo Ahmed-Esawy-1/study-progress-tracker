@@ -1,0 +1,84 @@
+<!-- Floating button -->
+<button
+    type="button"
+    class="btn btn-primary rounded-circle position-fixed bottom-0 end-0 m-4 shadow d-flex align-items-center justify-content-center"
+    style="width: 56px; height: 56px; z-index: 1050"
+    (click)="togglePanel()"
+    aria-label="Open chat"
+>
+    @if (!isOpen) {
+        <i class="bi bi-chat-dots-fill fs-5"></i>
+    } @else {
+        <i class="bi bi-x-lg"></i>
+    }
+</button>
+
+@if (isOpen) {
+    <div
+        class="card shadow position-fixed bottom-0 end-0 me-4 mb-5 overflow-hidden"
+        style="width: 340px; height: 460px; z-index: 1049; border-radius: 12px"
+    >
+        <!-- Header -->
+        <div
+            class="card-header bg-primary text-white d-flex justify-content-between align-items-center py-3"
+        >
+            <span class="fw-semibold">
+                <i class="bi bi-robot me-2"></i>
+                Assistant
+            </span>
+
+            <button
+                type="button"
+                class="btn-close btn-close-white"
+                (click)="togglePanel()"
+                aria-label="Close"
+            ></button>
+        </div>
+
+        <!-- Messages -->
+        <div class="card-body overflow-auto d-flex flex-column gap-2 p-3" #chatBody>
+            @for (msg of messages; track $index) {
+                <div
+                    class="p-2 px-3 rounded-3 small"
+                    [class.bg-primary]="msg.role === 'user'"
+                    [class.text-white]="msg.role === 'user'"
+                    [class.bg-light]="msg.role === 'assistant'"
+                    [class.align-self-end]="msg.role === 'user'"
+                    [class.align-self-start]="msg.role === 'assistant'"
+                    style="max-width: 80%"
+                >
+                    {{ msg.content }}
+                </div>
+            }
+
+            @if (loading) {
+                <div class="bg-light p-2 px-3 rounded-3 small align-self-start">
+                    <span class="spinner-grow spinner-grow-sm me-1"></span>
+                    <span class="spinner-grow spinner-grow-sm me-1"></span>
+                    <span class="spinner-grow spinner-grow-sm"></span>
+                </div>
+            }
+        </div>
+
+        <!-- Input -->
+        <form class="border-top p-2 d-flex gap-2" (ngSubmit)="send()">
+            <input
+                type="text"
+                class="form-control rounded-pill"
+                [(ngModel)]="draft"
+                name="draft"
+                placeholder="Type a message..."
+                [disabled]="loading"
+            />
+
+            <button
+                type="submit"
+                class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center flex-shrink-0"
+                style="width: 38px; height: 38px"
+                [disabled]="loading || !draft.trim()"
+            >
+                <i class="bi bi-send-fill"></i>
+            </button>
+        </form>
+    </div>
+}
