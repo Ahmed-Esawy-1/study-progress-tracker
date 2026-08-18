@@ -1,59 +1,53 @@
 # StudyProgressTracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.21.
+An Angular application for tracking study progress.
 
-## Development server
+This project was generated using [Angular CLI](https://angular.dev/tools/cli) version **21.2.21**.
 
-To start a local development server, run:
+## Prerequisites
+
+Make sure you have **Node.js** and **npm** installed.
+
+## Installation
+
+After cloning the project, install the required dependencies:
+
+```bash
+npm install
+```
+
+## Groq API Key
+
+Before running the application, add your **Groq API key** to:
+
+```text
+src/app/services/chat-widget.ts
+```
+
+Find the API key configuration and add your key:
+
+```ts
+const apiValue = 'your_groq_api_key_here';
+```
+
+> **Important:** Do not commit or push your API key to GitHub. The key is sensitive and should remain private.
+
+## Development Server
+
+After installing the dependencies and configuring your Groq API key, start the development server:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Once the server is running, open your browser and navigate to:
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```text
+http://localhost:4200/
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The application automatically reloads whenever you modify the source files.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* [Angular Documentation](https://angular.dev/)
+* [Angular CLI Documentation](https://angular.dev/tools/cli)
+* [Groq Documentation](https://console.groq.com/docs)
