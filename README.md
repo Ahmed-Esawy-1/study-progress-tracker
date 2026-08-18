@@ -48,6 +48,8 @@ http://localhost:4200/
 
 The application automatically reloads whenever you modify the source files.
 
+## Additional Resources
+
 * [Angular Documentation](https://angular.dev/)
 * [Angular CLI Documentation](https://angular.dev/tools/cli)
 * [Groq Documentation](https://console.groq.com/docs)
